@@ -5,7 +5,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.kafka.core.KafkaTemplate;
 
 /**
  * @author Bob

@@ -1,5 +1,6 @@
 package io.github.hizhangbo.service;
 
+import com.alibaba.fastjson.JSON;
 import io.github.hizhangbo.config.MessageConstanceTopic;
 import io.github.hizhangbo.model.Book;
 import lombok.extern.log4j.Log4j2;
@@ -23,11 +24,11 @@ public class MessageChannelService {
     private BookService bookService;
 
     public void sendBook() {
-        long count = 100l;//bookService.count();
+        long count = 20000l;//bookService.count();
         int size = 10;
-        for (int i = 0; i < count; i = i + size) {
+        for (int i = 10000; i < count; i = i + size) {
             Page<Book> books = bookService.findByPage(i, size);
-            books.get().forEach(book -> kafkaTemplate.send(MessageConstanceTopic.BOOK_TOPIC, book.getId(), book.toString()));
+            books.get().forEach(book -> kafkaTemplate.send(MessageConstanceTopic.BOOK_TOPIC, book.getId(), JSON.toJSONString(book)));
         }
 
     }
